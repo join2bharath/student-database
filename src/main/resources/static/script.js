@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
         loader.style.opacity = '0';
         setTimeout(() => {
             loader.style.display = 'none';
-            viewStudent.classList.remove('hidden');
         }, 500);
     }, 1500);
 
