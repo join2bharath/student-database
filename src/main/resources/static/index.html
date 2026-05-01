@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGen Student Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Multiple Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Preloader Overlay -->
+    <div id="loader" class="loader-overlay">
+        <div class="spinner"></div>
+        <h2 class="loader-text">Loading Assets...</h2>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="container hidden">
+        <div class="sidebar">
+            <img src="graphic.png" alt="Student Graphic" class="floating-img">
+            <h2 class="sidebar-title">Empower Your Education</h2>
+            <p class="sidebar-text">Join our advanced digital campus. Seamlessly register your details and unlock endless possibilities.</p>
+        </div>
+
+        <div class="glass-panel">
+            <h1>Student Enrollment</h1>
+            <p class="subtitle">Complete the form below to register</p>
+            
+            <form id="studentForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="studentId">Student ID</label>
+                        <input type="text" id="studentId" name="studentId" required placeholder="e.g. S1001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="rollNumber">Roll Number</label>
+                        <input type="text" id="rollNumber" name="rollNumber" required placeholder="e.g. 21BCE001">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="e.g. +1 234 567 8900">
+                </div>
+                
+                <div class="form-group">
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" name="address" required placeholder="Full residential address" rows="3"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Enroll Now</button>
+            </form>
+            
+            <div id="message" class="message hidden"></div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
