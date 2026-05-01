@@ -8,7 +8,10 @@ import jakarta.annotation.PostConstruct;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class StudentRepository {
@@ -27,7 +30,6 @@ public class StudentRepository {
         try (Connection conn = DriverManager.getConnection(url, username, password);
              Statement stmt = conn.createStatement()) {
             
-            // Create database if not exists (Though handled by URL parameter, it's good practice)
             stmt.execute("CREATE DATABASE IF NOT EXISTS student_db");
             stmt.execute("USE student_db");
 
@@ -52,7 +54,6 @@ public class StudentRepository {
         try (Connection conn = DriverManager.getConnection(url, username, password);
              PreparedStatement pstmt = conn.prepareStatement(insertSql)) {
              
-            // Make sure we use the right DB
             conn.setCatalog("student_db");
             
             pstmt.setString(1, student.getStudentId());
@@ -69,5 +70,32 @@ public class StudentRepository {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public List<Student> findAll() {
+        List<Student> students = new ArrayList<>();
+        String selectSql = "SELECT * FROM student";
+        
+        try (Connection conn = DriverManager.getConnection(url, username, password);
+             Statement stmt = conn.createStatement()) {
+             
+            conn.setCatalog("student_db");
+            ResultSet rs = stmt.executeQuery(selectSql);
+            
+            while (rs.next()) {
+                Student s = new Student();
+                s.setStudentId(rs.getString("student_id"));
+                s.setRollNumber(rs.getString("roll_number"));
+                s.setPhoneNumber(rs.getString("phone_number"));
+                s.setDateOfBirth(rs.getString("date_of_birth"));
+                s.setAddress(rs.getString("address"));
+                students.add(s);
+            }
+            
+        } catch (Exception e) {
+            System.err.println("Error finding students: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return students;
     }
 }
